@@ -13,7 +13,7 @@ public class Patient {
     public Patient() {
     }
 
-    public long getId() {
+    public static long getId() {
         return id;
     }
 
