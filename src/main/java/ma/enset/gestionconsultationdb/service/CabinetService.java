@@ -1,55 +1,108 @@
 package ma.enset.gestionconsultationdb.service;
 
+import ma.enset.gestionconsultationdb.dao.IConsultationDao;
+import ma.enset.gestionconsultationdb.dao.IPatientDao;
 import ma.enset.gestionconsultationdb.entities.Consultation;
 import ma.enset.gestionconsultationdb.entities.Patient;
 
+import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 public class CabinetService implements ICabinetService{
+
+    private IPatientDao patientDao;
+    private IConsultationDao consultationDao;
     @Override
     public void addPatient(Patient patient) {
-
+        try {
+            patientDao.create(patient);
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     @Override
-    public void deletePatient(Long id) {
-
+    public void deletePatient(Patient patient) {
+        try {
+            patientDao.delete(patient);
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     @Override
     public void updatePatient(Patient patient) {
-
+        try {
+            patientDao.update(patient);
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     @Override
     public List<Patient> getAllPatients() {
-        return List.of();
+        List<Patient> patients;
+
+        try {
+            patients = patientDao.findAll();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return patients;
     }
 
     @Override
     public Patient getPatientById(Long id) {
-        return null;
+        Patient patient = null;
+        try {
+            patient=patientDao.FindById(id);
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return patient;
     }
 
     @Override
     public void addConsultation(Consultation consultation) {
-
+        try {
+            consultationDao.create(consultation);
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
     }
 
-    @Override
-    public void deleteConsultation(Long id) {
 
+
+    @Override
+    public void deleteConsultation(Consultation consultation) {
+        try {
+            consultationDao.delete(consultation);
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     @Override
     public void updateConsultation(Consultation consultation) {
-
+        try {
+            consultationDao.update(consultation);
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     @Override
     public List<Consultation> getAllConsultations() {
-        return List.of();
+        Consultation consultation = null;
+        try {
+            consultation=consultationDao.findAll();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return consultation;
     }
+
 
     @Override
     public Consultation getConsultationById(Long id) {

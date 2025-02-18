@@ -23,7 +23,7 @@ public class PatientDao implements IPatientDao {
     }
 
     @Override
-    public void delete(Long aLong) throws SQLException {
+    public void delete(Patient patient) throws SQLException {
         Connection con = DbConnection.getConnection();
         PreparedStatement ps = con.prepareStatement("DELETE FROM PATIENTS WHERE ID_PATIENT=?");
         ps.setLong(1,Patient.getId());
@@ -42,7 +42,7 @@ public class PatientDao implements IPatientDao {
     }
 
     @Override
-    public List<Patient> FindAll() throws SQLException {
+    public List<Patient> findAll() throws SQLException {
         Connection con = DbConnection.getConnection();
         PreparedStatement ps = con.prepareStatement("SELECT * FROM PATIENTS");
         ResultSet rs = ps.executeQuery();
