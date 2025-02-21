@@ -13,6 +13,12 @@ public class CabinetService implements ICabinetService{
 
     private IPatientDao patientDao;
     private IConsultationDao consultationDao;
+
+    public CabinetService(IPatientDao patientDao, IConsultationDao consultationDao) {
+        this.patientDao = patientDao;
+        this.consultationDao = consultationDao;
+    }
+
     @Override
     public void addPatient(Patient patient) {
         try {
@@ -96,11 +102,11 @@ public class CabinetService implements ICabinetService{
     public List<Consultation> getAllConsultations() {
         Consultation consultation = null;
         try {
-            consultation=consultationDao.findAll();
+            consultation= (Consultation) consultationDao.findAll();
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
-        return consultation;
+        return (List<Consultation>) consultation;
     }
 
 

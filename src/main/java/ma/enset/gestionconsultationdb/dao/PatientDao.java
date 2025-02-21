@@ -14,7 +14,7 @@ public class PatientDao implements IPatientDao {
     @Override
     public void create(Patient patient) throws SQLException {
         Connection con = DbConnection.getConnection();
-        PreparedStatement ps = con.prepareStatement("INSERT INTO PATIENTS(NOM,PRENOM,tel)"+"VALUE(?,?,?)");
+        PreparedStatement ps = con.prepareStatement("INSERT INTO patients (NOM,PRENOM,tel)"+"VALUE(?,?,?)");
         ps.setString(1,patient.getNom());
         ps.setString(2,patient.getPrenom());
         ps.setString(3,patient.getTel());
@@ -25,7 +25,7 @@ public class PatientDao implements IPatientDao {
     @Override
     public void delete(Patient patient) throws SQLException {
         Connection con = DbConnection.getConnection();
-        PreparedStatement ps = con.prepareStatement("DELETE FROM PATIENTS WHERE ID_PATIENT=?");
+        PreparedStatement ps = con.prepareStatement("DELETE FROM patients WHERE ID_PATIENT=?");
         ps.setLong(1,Patient.getId());
         ps.executeUpdate();
     }
@@ -33,7 +33,7 @@ public class PatientDao implements IPatientDao {
     @Override
     public void update(Patient patient) throws SQLException {
         Connection con = DbConnection.getConnection();
-        PreparedStatement ps = con.prepareStatement("UPDATE PATIENTS SET NOM=?,PRENOM=?,tel=? WHERE ID_PATIENT=?");
+        PreparedStatement ps = con.prepareStatement("UPDATE patients SET NOM=?,PRENOM=?,tel=? WHERE ID_PATIENT=?");
         ps.setString(1,patient.getNom());
         ps.setString(2,patient.getPrenom());
         ps.setString(3,patient.getTel());
@@ -44,7 +44,7 @@ public class PatientDao implements IPatientDao {
     @Override
     public List<Patient> findAll() throws SQLException {
         Connection con = DbConnection.getConnection();
-        PreparedStatement ps = con.prepareStatement("SELECT * FROM PATIENTS");
+        PreparedStatement ps = con.prepareStatement("SELECT * FROM patients");
         ResultSet rs = ps.executeQuery();
         List<Patient> patients = new ArrayList<>();
         while (rs.next()) {
@@ -61,7 +61,7 @@ public class PatientDao implements IPatientDao {
     @Override
     public Patient FindById(Long id) throws SQLException {
         Connection con = DbConnection.getConnection();
-        PreparedStatement ps = con.prepareStatement("SELECT * FROM PATIENTS WHERE ID_PATIENT=?");
+        PreparedStatement ps = con.prepareStatement("SELECT * FROM patients WHERE ID_PATIENT=?");
         ps.setLong(1,id);
         ResultSet rs = ps.executeQuery();
         Patient patient = new Patient();

@@ -3,7 +3,7 @@ package ma.enset.gestionconsultationdb.entities;
 import java.util.List;
 
 public class Patient {
-    private long id;
+    private static long id;
     private String nom;
     private String prenom;
     private String tel;
@@ -57,5 +57,15 @@ public class Patient {
 
     public void setConsultations(List<Consultation> consultations) {
         this.consultations = consultations;
+    }
+
+    @Override
+    public String toString() {
+        return "Patient{" +
+                "nom='" + nom + '\'' +
+                ", prenom='" + prenom + '\'' +
+                ", tel='" + tel + '\'' +
+                ", consultations=" + consultations +
+                '}';
     }
 }
