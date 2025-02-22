@@ -5,6 +5,7 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
@@ -31,6 +32,8 @@ public class PatientController implements Initializable {
     @FXML private TableColumn<Patient,String> columnNom;
     @FXML private TableColumn<Patient,String>  columnPrenom;
     @FXML private TableColumn<Patient,String>  columnTel;
+    @FXML private Label labelSuccess;
+
     private ICabinetService cabinetService ;
 
     private ObservableList<Patient> patients = FXCollections.observableArrayList();
@@ -58,6 +61,7 @@ public class PatientController implements Initializable {
         Patient patient = tablePatients.getSelectionModel().getSelectedItem();
         cabinetService.deletePatient(patient);
         loadPatients();
+        labelSuccess.setText("Patient deleted");
     }
     private void loadPatients() {
         patients.setAll(cabinetService.getAllPatients());

@@ -13,7 +13,6 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 
-
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="451.0" prefWidth="706.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ma.enset.gestionconsultationdb.controllers.PatientController">
    <top>
       <VBox prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">
@@ -39,10 +38,11 @@
             </GridPane>
             <HBox prefHeight="115.0" prefWidth="706.0" spacing="10.0">
                <children>
-                  <Button mnemonicParsing="false" text="Ajouter" onAction="#addPatient"/>
-                  <Button mnemonicParsing="false" text="Supprimer" onAction="#deletePatient"/>
-                  <Button mnemonicParsing="false" text="Modifier" onAction="#updatePatient" />
+                  <Button mnemonicParsing="false" onAction="#addPatient" text="Ajouter" />
+                  <Button mnemonicParsing="false" onAction="#deletePatient" text="Supprimer" />
+                  <Button mnemonicParsing="false" onAction="#updatePatient" text="Modifier" />
                   <TextField fx:id="textFiledSearch" />
+                  <Label fx:id="labelSuccess" textFill="green"/>
                </children>
                <padding>
                   <Insets left="10.0" top="10.0" />

@@ -14,16 +14,17 @@ public class ConsultationDao implements IConsultationDao {
     @Override
     public void create(Consultation consultation) throws SQLException {
         Connection con = DbConnection.getConnection();
-        PreparedStatement ps = con.prepareStatement("INSERT INTO CONSULTATIONS(DATECONSULTATION,DESCRIPTION)" + "VALUE(?,?)");
+        PreparedStatement ps = con.prepareStatement("INSERT INTO consultations (DATE_CONSULTATION,DESCRIPTION,ID_PATIENT)" + "VALUE(?,?,?)");
         ps.setDate(1, consultation.getDateConsultation());
-        ps.setString(1, consultation.getDescription());
+        ps.setString(2, consultation.getDescription());
+        ps.setLong(3, consultation.getPatient().getId());
         ps.executeUpdate();//for insert request
     }
 
     @Override
     public void delete(Consultation consultation) throws SQLException {
         Connection con = DbConnection.getConnection();
-        PreparedStatement ps = con.prepareStatement("DELETE FROM CONSULTATIONS WHERE ID_CONSULTATION=?");
+        PreparedStatement ps = con.prepareStatement("DELETE FROM consultations WHERE ID_CONSULTATION=?");
         ps.setLong(1, consultation.getId());
         ps.executeUpdate();
     }
@@ -31,7 +32,7 @@ public class ConsultationDao implements IConsultationDao {
     @Override
     public void update(Consultation consultation) throws SQLException {
         Connection con = DbConnection.getConnection();
-        PreparedStatement ps = con.prepareStatement("UPDATE CONSULTATIONS SET DATECONSULTATION=?,DESCRIPTION=? WHERE ID_CONSULTATION=?");
+        PreparedStatement ps = con.prepareStatement("UPDATE consultations SET DATECONSULTATION=?,DESCRIPTION=? WHERE ID_CONSULTATION=?");
         ps.setDate(1, consultation.getDateConsultation());
         ps.setString(2, consultation.getDescription());
         ps.setLong(3, consultation.getId());
@@ -41,14 +42,17 @@ public class ConsultationDao implements IConsultationDao {
     @Override
     public List<Consultation> findAll() throws SQLException {
         Connection con = DbConnection.getConnection();
-        PreparedStatement ps = con.prepareStatement("SELECT * FROM CONSULTATIONS");
+        PreparedStatement ps = con.prepareStatement("SELECT * FROM consultations");
         ResultSet rs = ps.executeQuery();
         List<Consultation> consultations = new ArrayList<>();
         while (rs.next()) {
             Consultation consultation = new Consultation();
-            consultation.setId(rs.getLong("ID_Consultation"));
-            consultation.setDateConsultation(rs.getDate("DATECONSULTATION"));
+            consultation.setId(rs.getLong("ID_CONSULTATION"));
+            consultation.setDateConsultation(rs.getDate("DATE_CONSULTATION"));
             consultation.setDescription(rs.getString("DESCRIPTION"));
+            Patient patient = new Patient();
+            patient.setId(rs.getLong("ID_PATIENT"));
+            consultation.setPatient(patient);
             consultations.add(consultation);
         }
         return consultations;
@@ -57,13 +61,13 @@ public class ConsultationDao implements IConsultationDao {
     @Override
     public Consultation FindById(Long id) throws SQLException {
         Connection con = DbConnection.getConnection();
-        PreparedStatement ps = con.prepareStatement("SELECT * FROM PATIENTS WHERE ID_CONSULTATION=?");
+        PreparedStatement ps = con.prepareStatement("SELECT * FROM patients WHERE ID_CONSULTATION=?");
         ps.setLong(1, id);
         ResultSet rs = ps.executeQuery();
         Consultation consultation = new Consultation();
         if (rs.next()) {
-            consultation.setId(rs.getLong("ID_Consultation"));
-            consultation.setDateConsultation(rs.getDate("DATECONSULTATION"));
+            consultation.setId(rs.getLong("ID_CONSULTATION"));
+            consultation.setDateConsultation(rs.getDate("DATEC_ONSULTATION"));
             consultation.setDescription(rs.getString("DESCRIPTION"));
         }
         return consultation;

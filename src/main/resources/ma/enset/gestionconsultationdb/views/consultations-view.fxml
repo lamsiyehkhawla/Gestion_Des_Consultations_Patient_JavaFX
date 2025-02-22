@@ -40,7 +40,7 @@
             </GridPane>
             <HBox prefHeight="106.0" prefWidth="600.0">
                <children>
-                  <Button mnemonicParsing="false" text="Ajouter" />
+                  <Button mnemonicParsing="false" text="Ajouter"  onAction="#addConsultation"/>
                   <Button mnemonicParsing="false" text="Supprimer" />
                </children>
             </HBox>

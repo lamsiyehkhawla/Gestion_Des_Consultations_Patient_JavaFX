@@ -100,13 +100,13 @@ public class CabinetService implements ICabinetService{
 
     @Override
     public List<Consultation> getAllConsultations() {
-        Consultation consultation = null;
+        List<Consultation> consultations = null;
         try {
-            consultation= (Consultation) consultationDao.findAll();
+            consultations= consultationDao.findAll();
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
-        return (List<Consultation>) consultation;
+        return consultations;
     }
 
 
