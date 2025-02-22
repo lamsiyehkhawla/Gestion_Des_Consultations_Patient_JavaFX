@@ -2,6 +2,7 @@ package ma.enset.gestionconsultationdb.controllers;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.TableColumn;
@@ -42,5 +43,26 @@ public class PatientController implements Initializable {
         columnTel.setCellValueFactory(new PropertyValueFactory<>("tel"));
         patients.setAll(cabinetService.getAllPatients());
         tablePatients.setItems(patients);
+    }
+
+    public void addPatient() {
+        Patient patient = new Patient();
+        patient.setNom(textFiledNom.getText());
+        patient.setPrenom(textFiledPrenom.getText());
+        patient.setTel(textFiledTel.getText());
+        cabinetService.addPatient(patient);
+        tablePatients.setItems(patients);
+        loadPatients();
+    }
+    public void deletePatient() {
+        Patient patient = tablePatients.getSelectionModel().getSelectedItem();
+        cabinetService.deletePatient(patient);
+        loadPatients();
+    }
+    private void loadPatients() {
+        patients.setAll(cabinetService.getAllPatients());
+
+    }
+    public void updatePatient() {
     }
 }

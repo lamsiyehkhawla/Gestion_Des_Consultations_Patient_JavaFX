@@ -14,7 +14,7 @@ public class PatientDao implements IPatientDao {
     @Override
     public void create(Patient patient) throws SQLException {
         Connection con = DbConnection.getConnection();
-        PreparedStatement ps = con.prepareStatement("INSERT INTO patients (NOM,PRENOM,tel)"+"VALUE(?,?,?)");
+        PreparedStatement ps = con.prepareStatement("INSERT INTO patients (NOM,PRENOM,TEL)"+"VALUE(?,?,?)");
         ps.setString(1,patient.getNom());
         ps.setString(2,patient.getPrenom());
         ps.setString(3,patient.getTel());
@@ -33,7 +33,7 @@ public class PatientDao implements IPatientDao {
     @Override
     public void update(Patient patient) throws SQLException {
         Connection con = DbConnection.getConnection();
-        PreparedStatement ps = con.prepareStatement("UPDATE patients SET NOM=?,PRENOM=?,tel=? WHERE ID_PATIENT=?");
+        PreparedStatement ps = con.prepareStatement("UPDATE patients SET NOM=?,PRENOM=?,TEL=? WHERE ID_PATIENT=?");
         ps.setString(1,patient.getNom());
         ps.setString(2,patient.getPrenom());
         ps.setString(3,patient.getTel());

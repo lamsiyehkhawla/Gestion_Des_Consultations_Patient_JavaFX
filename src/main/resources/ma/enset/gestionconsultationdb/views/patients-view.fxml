@@ -39,9 +39,9 @@
             </GridPane>
             <HBox prefHeight="115.0" prefWidth="706.0" spacing="10.0">
                <children>
-                  <Button mnemonicParsing="false" text="Ajouter" />
-                  <Button mnemonicParsing="false" text="Supprimer" />
-                  <Button mnemonicParsing="false" text="Modifier" />
+                  <Button mnemonicParsing="false" text="Ajouter" onAction="#addPatient"/>
+                  <Button mnemonicParsing="false" text="Supprimer" onAction="#deletePatient"/>
+                  <Button mnemonicParsing="false" text="Modifier" onAction="#updatePatient" />
                   <TextField fx:id="textFiledSearch" />
                </children>
                <padding>
