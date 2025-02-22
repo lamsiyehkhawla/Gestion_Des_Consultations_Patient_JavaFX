@@ -41,8 +41,8 @@ public class PatientController implements Initializable {
         columnNom.setCellValueFactory(new PropertyValueFactory<>("nom"));
         columnPrenom.setCellValueFactory(new PropertyValueFactory<>("prenom"));
         columnTel.setCellValueFactory(new PropertyValueFactory<>("tel"));
-        patients.setAll(cabinetService.getAllPatients());
         tablePatients.setItems(patients);
+        loadPatients();
     }
 
     public void addPatient() {
