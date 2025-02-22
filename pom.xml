@@ -141,7 +141,7 @@
                         <id>default-cli</id>
                         <configuration>
                             <mainClass>
-                                ma.enset.gestionconsultationdb.gestionconsultationdb/ma.enset.gestionconsultationdb.HelloApplication
+                                ma.enset.gestionconsultationdb.gestionconsultationdb/ma.enset.gestionconsultationdb.Main
                             </mainClass>
                             <launcher>app</launcher>
                             <jlinkZipName>app</jlinkZipName>

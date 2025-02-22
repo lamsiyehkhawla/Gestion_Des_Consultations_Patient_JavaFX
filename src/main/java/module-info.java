@@ -12,6 +12,6 @@ module ma.enset.gestionconsultationdb.gestionconsultationdb {
     requires com.almasb.fxgl.all;
     requires java.sql;
 
-    opens ma.enset.gestionconsultationdb to javafx.fxml;
+    opens ma.enset.gestionconsultationdb.controllers to javafx.fxml;
     exports ma.enset.gestionconsultationdb;
 }
