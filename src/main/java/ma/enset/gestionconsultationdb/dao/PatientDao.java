@@ -26,7 +26,7 @@ public class PatientDao implements IPatientDao {
     public void delete(Patient patient) throws SQLException {
         Connection con = DbConnection.getConnection();
         PreparedStatement ps = con.prepareStatement("DELETE FROM patients WHERE ID_PATIENT=?");
-        ps.setLong(1,Patient.getId());
+        ps.setLong(1,patient.getId());
         ps.executeUpdate();
     }
 
@@ -37,7 +37,7 @@ public class PatientDao implements IPatientDao {
         ps.setString(1,patient.getNom());
         ps.setString(2,patient.getPrenom());
         ps.setString(3,patient.getTel());
-        ps.setLong(4,Patient.getId());
+        ps.setLong(4,patient.getId());
         ps.executeUpdate();
     }
 
