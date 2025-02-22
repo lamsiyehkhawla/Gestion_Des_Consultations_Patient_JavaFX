@@ -47,10 +47,10 @@ public class ConsultationDao implements IConsultationDao {
         List<Consultation> consultations = new ArrayList<>();
         while (rs.next()) {
             Consultation consultation = new Consultation();
+            Patient patient = new Patient();
             consultation.setId(rs.getLong("ID_CONSULTATION"));
             consultation.setDateConsultation(rs.getDate("DATE_CONSULTATION"));
             consultation.setDescription(rs.getString("DESCRIPTION"));
-            Patient patient = new Patient();
             patient.setId(rs.getLong("ID_PATIENT"));
             consultation.setPatient(patient);
             consultations.add(consultation);

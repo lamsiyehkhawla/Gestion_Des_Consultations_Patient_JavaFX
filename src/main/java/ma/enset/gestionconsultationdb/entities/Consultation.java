@@ -48,5 +48,10 @@ public class Consultation {
     public void setId(long id) {
         this.id = id;
     }
-
+    public long getPatientId() {
+        if (patient != null) {
+            return patient.getId();  // Return the patient's ID if patient is not null
+        }
+        return -1;  // Return a default value if the patient is null
+    }
 }

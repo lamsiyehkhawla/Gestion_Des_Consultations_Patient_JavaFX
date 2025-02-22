@@ -1,7 +1,9 @@
 package ma.enset.gestionconsultationdb.controllers;
 
+import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
@@ -22,11 +24,11 @@ public class ConsultationController implements Initializable {
     @FXML private DatePicker dateConsultation;
     @FXML private  ComboBox comboPatient;
     @FXML private TextArea testFiledDescription;
-    @FXML private  TableView tableConsultation;
+    @FXML private TableView<Consultation> tableConsultation;
     @FXML private  TableColumn columnId;
-    @FXML private  TableColumn columnDateConsultation;
-    @FXML private  TableColumn columnDescription;
-    @FXML private  TableColumn columnPatient;
+    @FXML private  TableColumn<Consultation, Date> columnDateConsultation;
+    @FXML private TableColumn<Consultation, String> columnDescription;
+    @FXML private TableColumn<Consultation, String> columnPatient;
     private ICabinetService cabinetService ;
     private ObservableList<Patient> patients = FXCollections.observableArrayList();
     private ObservableList<Consultation> consultations = FXCollections.observableArrayList(); // Correct type
@@ -41,7 +43,11 @@ public class ConsultationController implements Initializable {
         columnId.setCellValueFactory(new PropertyValueFactory<>("id"));
         columnDateConsultation.setCellValueFactory(new PropertyValueFactory<>("dateConsultation"));
         columnDescription.setCellValueFactory(new PropertyValueFactory<>("description"));
-        columnPatient.setCellValueFactory(new PropertyValueFactory<>("patient"));
+        // Set the cell value factory for the Patient column to display the patient's ID
+        columnPatient.setCellValueFactory(cellData -> new SimpleStringProperty(
+                String.valueOf(cellData.getValue().getPatient().getId())
+        ));
+
         tableConsultation.setItems(consultations);
         loadConsultation();
     }
@@ -60,4 +66,6 @@ public class ConsultationController implements Initializable {
         tableConsultation.setItems(consultations);  // Set the TableView items
     }
 
+    public void deleteConsultation() {
+    }
 }
