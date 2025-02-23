@@ -32,7 +32,7 @@ public class ConsultationDao implements IConsultationDao {
     @Override
     public void update(Consultation consultation) throws SQLException {
         Connection con = DbConnection.getConnection();
-        PreparedStatement ps = con.prepareStatement("UPDATE consultations SET DATECONSULTATION=?,DESCRIPTION=? WHERE ID_CONSULTATION=?");
+        PreparedStatement ps = con.prepareStatement("UPDATE consultations SET DATE_CONSULTATION=?,DESCRIPTION=? WHERE ID_CONSULTATION=?");
         ps.setDate(1, consultation.getDateConsultation());
         ps.setString(2, consultation.getDescription());
         ps.setLong(3, consultation.getId());
@@ -42,7 +42,10 @@ public class ConsultationDao implements IConsultationDao {
     @Override
     public List<Consultation> findAll() throws SQLException {
         Connection con = DbConnection.getConnection();
-        PreparedStatement ps = con.prepareStatement("SELECT * FROM consultations");
+        PreparedStatement ps = con.prepareStatement(
+                "SELECT c.*, p.nom AS NOM FROM consultations c " +
+                        "JOIN patients p ON c.ID_PATIENT = p.ID_PATIENT"
+        );
         ResultSet rs = ps.executeQuery();
         List<Consultation> consultations = new ArrayList<>();
         while (rs.next()) {
@@ -52,6 +55,7 @@ public class ConsultationDao implements IConsultationDao {
             consultation.setDateConsultation(rs.getDate("DATE_CONSULTATION"));
             consultation.setDescription(rs.getString("DESCRIPTION"));
             patient.setId(rs.getLong("ID_PATIENT"));
+            patient.setNom(rs.getString("NOM")); // Set the patient's name
             consultation.setPatient(patient);
             consultations.add(consultation);
         }

@@ -49,6 +49,7 @@
                 <HBox spacing="10" alignment="CENTER">
                     <children>
                         <Button text="➕ Ajouter" fx:id="btnAdd" onAction="#addConsultation" styleClass="btn-primary" />
+                        <Button text="✏️ Modifier" fx:id="btnUpdate" onAction="#updateConsultation" styleClass="btn-warning" />
                         <Button text="❌ Supprimer" fx:id="btnDelete" onAction="#deleteConsultation" styleClass="btn-danger" />
                     </children>
                 </HBox>
