@@ -12,7 +12,7 @@ public interface ICabinetService {
     void updatePatient(Patient patient);
     List<Patient> getAllPatients();
     Patient getPatientById(Long id);
-
+    List<Patient> serachPatientByQuery(String query);
     //Funtions for Consultation
     void addConsultation(Consultation consultation);
     void deleteConsultation(Consultation consultation);

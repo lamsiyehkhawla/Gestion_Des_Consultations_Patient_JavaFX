@@ -33,6 +33,7 @@ public class PatientController implements Initializable {
     @FXML private TableColumn<Patient,String>  columnPrenom;
     @FXML private TableColumn<Patient,String>  columnTel;
     @FXML private Label labelSuccess;
+    private Patient selectedPatient;
 
     private ICabinetService cabinetService ;
 
@@ -46,6 +47,18 @@ public class PatientController implements Initializable {
         columnTel.setCellValueFactory(new PropertyValueFactory<>("tel"));
         tablePatients.setItems(patients);
         loadPatients();
+        textFiledSearch.textProperty().addListener((observable, oldValue, newValue) -> {
+            patients.setAll(cabinetService.serachPatientByQuery(newValue));
+
+        });
+        tablePatients.getSelectionModel().selectedItemProperty().addListener((observable, oldPatient, newPatient) -> {
+            if (newPatient != null) {
+                textFiledNom.setText(newPatient.getNom());
+                textFiledPrenom.setText(newPatient.getPrenom());
+                textFiledTel.setText(newPatient.getTel());
+                selectedPatient=newPatient;
+            }
+        });
     }
 
     public void addPatient() {
@@ -63,10 +76,18 @@ public class PatientController implements Initializable {
         loadPatients();
         labelSuccess.setText("Patient deleted");
     }
+
+    public void updatePatient() {
+        selectedPatient.setNom(textFiledNom.getText());
+        selectedPatient.setPrenom(textFiledPrenom.getText());
+        selectedPatient.setTel(textFiledTel.getText());
+        cabinetService.updatePatient(selectedPatient);
+        tablePatients.setItems(patients);
+        loadPatients();
+
+    }
     private void loadPatients() {
         patients.setAll(cabinetService.getAllPatients());
 
-    }
-    public void updatePatient() {
     }
 }
