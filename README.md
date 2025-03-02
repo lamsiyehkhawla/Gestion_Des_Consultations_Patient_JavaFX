@@ -10,7 +10,7 @@ This application streamlines the process of managing patient consultations and o
 
 Here are some Screenshots for some use cases :
 ***List de patient***
-<img src="/captures/list_patient.png">
+<img src="/captures/list_patients.png">
 
 ***Update patient***
 <img src="/captures/update_patient_nom.png">
@@ -18,7 +18,7 @@ Here are some Screenshots for some use cases :
 ***Search patient***
 <img src="/captures/search_patient.png">
 
-***Patient table ***
+***Patient table***
 <img src="/captures/patient_db.png">
 
 
